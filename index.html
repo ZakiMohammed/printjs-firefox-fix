@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./node_modules/@picocss/pico/css/pico.min.css" />
+    <link rel="stylesheet" href="./node_modules/print-js/dist/print.css" />
+    <title>🍹 Print-JS</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1>🍹 Print-JS</h1>
+      <button id="btnDefault">Default</button>
+      <button id="btnFileLarge">Large File</button>
+      <button id="btnFileExtraLarge">Extra Large</button>
+    </main>
+
+    <script src="node_modules/print-js/dist/print.js"></script>
+    <script>
+      const btnDefault = document.getElementById('btnDefault');
+      const btnFileLarge = document.getElementById('btnFileLarge');
+      const btnFileExtraLarge = document.getElementById('btnFileExtraLarge');
+
+      const isFirefox = () => {
+        return typeof InstallTrigger !== 'undefined';
+      };
+
+      const getFirefoxMajorVersion = () => {
+        try {
+          const userAgent = navigator.userAgent;
+          const firefoxVersionRegex = /firefox\/(\S+)/;
+          const match = userAgent.toLowerCase().match(firefoxVersionRegex);
+          if (match) {
+            return match[1].split('.').map(x => parseInt(x))[0];
+          }
+        } catch {}
+
+        return null;
+      };
+
+      const customPrint = function (url) {
+        const iframe = document.createElement('iframe');
+        document.body.appendChild(iframe);
+
+        iframe.style.display = 'none';
+        iframe.src = url;
+        iframe.onload = function () {
+          iframe.focus();
+          iframe.contentWindow.print();
+        };
+      };
+
+      btnDefault.onclick = function () {
+        if (isFirefox() && getFirefoxMajorVersion() >= 110) {
+          customPrint('assets/file-lg.pdf');
+        } else {
+          printJS({ printable: 'assets/file-lg.pdf' });
+        }
+      };
+      btnFileLarge.onclick = function () {
+        printJS({
+          printable: 'assets/file-lg.pdf',
+          type: 'pdf',
+          showModal: true,
+        });
+      };
+      btnFileExtraLarge.onclick = function () {
+        printJS({
+          printable: 'assets/file-xl.pdf',
+          type: 'pdf',
+          showModal: true,
+        });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "print-js-app",
+  "version": "1.0.0",
+  "description": "Providing fix for Firefox 110 blank print issue",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "Print-JS"
+  ],
+  "author": "Zaki Mohammed",
+  "license": "ISC",
+  "dependencies": {
+    "@picocss/pico": "^1.5.7",
+    "print-js": "^1.6.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZakiMohammed/printjs-firefox-fix.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZakiMohammed/printjs-firefox-fix/issues"
+  },
+  "homepage": "https://github.com/ZakiMohammed/printjs-firefox-fix#readme"
+}
